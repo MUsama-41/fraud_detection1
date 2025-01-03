@@ -28,8 +28,8 @@ def process_data(input_csv, output_dir):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
     # Handle class imbalance
-    smote = SMOTE(random_state=42)
-    X_train, y_train = smote.fit_resample(X_train, y_train)
+    #smote = SMOTE(random_state=42)
+    #X_train, y_train = smote.fit_resample(X_train, y_train)
 
     # Save processed data
     X_train.to_csv(f'{output_dir}/X_train.csv', index=False)
@@ -39,3 +39,6 @@ def process_data(input_csv, output_dir):
 
 # Example Usage:
 # process_data('creditcard.csv', './processed_data')
+input_csv = "data_processing/creditcard.csv"
+output_dir = "model_training"
+process_data(input_csv, output_dir)

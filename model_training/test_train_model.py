@@ -2,9 +2,13 @@ import os
 from training import train_and_evaluate_model
 from sklearn.ensemble import RandomForestClassifier
 import joblib
+from pathlib import Path
+
 
 def test_train_and_evaluate_model(tmp_path):
     # Create mock processed data
+    tmp_path = Path(tmp_path)
+
     X_train_csv = tmp_path / "X_train.csv"
     y_train_csv = tmp_path / "y_train.csv"
     X_test_csv = tmp_path / "X_test.csv"
@@ -19,7 +23,7 @@ def test_train_and_evaluate_model(tmp_path):
     model_path = tmp_path / "fraud_model.pkl"
 
     # Run model training and evaluation
-    train_and_evaluate_model(tmp_path, model_path)
+    train_and_evaluate_model(model_path)
 
     # Check if model file is created
     assert os.path.exists(model_path)
@@ -27,3 +31,5 @@ def test_train_and_evaluate_model(tmp_path):
     # Verify model loading
     model = joblib.load(model_path)
     assert isinstance(model, RandomForestClassifier)
+
+test_train_and_evaluate_model("model_training")

@@ -3,7 +3,7 @@ from sklearn.metrics import classification_report, roc_auc_score
 import joblib
 import pandas as pd
 
-def train_and_evaluate_model(data_dir, model_path):
+def train_and_evaluate_model(model_path):
     """
     Train a RandomForest model and evaluate it on the test dataset.
 
@@ -15,10 +15,10 @@ def train_and_evaluate_model(data_dir, model_path):
         None
     """
     # Load data
-    X_train = pd.read_csv(f'{data_dir}/X_train.csv')
-    y_train = pd.read_csv(f'{data_dir}/y_train.csv').squeeze()
-    X_test = pd.read_csv(f'{data_dir}/X_test.csv')
-    y_test = pd.read_csv(f'{data_dir}/y_test.csv').squeeze()
+    X_train = pd.read_csv(f'X_train.csv')
+    y_train = pd.read_csv(f'y_train.csv').squeeze()
+    X_test = pd.read_csv(f'X_test.csv')
+    y_test = pd.read_csv(f'y_test.csv').squeeze()
 
     # Train model
     model = RandomForestClassifier(random_state=42)
@@ -33,4 +33,4 @@ def train_and_evaluate_model(data_dir, model_path):
     joblib.dump(model, model_path)
 
 # Example Usage:
-# train_and_evaluate_model('./processed_data', 'fraud_model.pkl')
+train_and_evaluate_model('model_training/fraud_model.pkl')
