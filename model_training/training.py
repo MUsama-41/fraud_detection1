@@ -33,4 +33,4 @@ def train_and_evaluate_model(model_path):
     joblib.dump(model, model_path)
 
 # Example Usage:
-train_and_evaluate_model('model_training/fraud_model.pkl')
+train_and_evaluate_model('model_training/fraud_model.pkl') 
