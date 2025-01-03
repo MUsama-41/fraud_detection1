@@ -40,5 +40,5 @@ jobs:
     - name: Run tests
       run: |
         pytest data_processing/test_data_processing.py --disable-warnings
-        pytest model_training/test_train_model.py --disable-warnings
+        pytest model_training/test_train_model.py
         pytest flask_api/test_app.py --disable-warnings
