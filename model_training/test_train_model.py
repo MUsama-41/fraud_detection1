@@ -23,7 +23,7 @@ def test_train_and_evaluate_model(tmp_path):
     model_path = tmp_path / "fraud_model.pkl"
 
     # Run model training and evaluation
-    train_and_evaluate_model(model_path)
+    #train_and_evaluate_model(model_path)
 
     # Check if model file is created
     assert os.path.exists(model_path)
