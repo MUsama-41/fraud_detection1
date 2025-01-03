@@ -5,7 +5,7 @@ import numpy as np
 app = Flask(__name__)
 
 # Load the model at startup
-model = joblib.load('fraud_model.pkl')
+model = joblib.load("model_training/fraud_model.pkl")
 
 @app.route('/healthcheck', methods=['GET'])
 def healthcheck():
