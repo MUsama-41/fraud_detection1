@@ -2,3 +2,4 @@ flask
 pytest
 imbalanced-learn
 scikit-learn
+pandas
