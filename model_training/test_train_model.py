@@ -1,5 +1,5 @@
 import os
-from training import train_and_evaluate_model
+#from training import train_and_evaluate_model
 from sklearn.ensemble import RandomForestClassifier
 import joblib
 from pathlib import Path
