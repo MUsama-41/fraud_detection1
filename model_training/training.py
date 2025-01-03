@@ -1,21 +1,11 @@
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, roc_auc_score
-import joblib
+from sklearn.metrics import accuracy_score, roc_auc_score,classification_report
 import pandas as pd
+import joblib
 from pathlib import Path
 
 
 def train_and_evaluate_model(model_path, X_train_path, y_train_path, X_test_path, y_test_path):
-    """
-    Train a RandomForest model and evaluate it on the test dataset.
-
-    Args:
-        data_dir (str): Directory containing processed train/test CSV files.
-        model_path (str): Path to save the trained model.
-
-    Returns:
-        None
-    """
     # Load data
     X_train = pd.read_csv(X_train_path)
     y_train = pd.read_csv(y_train_path).values.ravel()
@@ -26,10 +16,17 @@ def train_and_evaluate_model(model_path, X_train_path, y_train_path, X_test_path
     model = RandomForestClassifier(random_state=42)
     model.fit(X_train, y_train)
 
-    # Evaluate
+    # Evaluate model
     y_pred = model.predict(X_test)
-    print(classification_report(y_test, y_pred))
-    print("AUC:", roc_auc_score(y_test, model.predict_proba(X_test)[:, 1]))
+    accuracy = accuracy_score(y_test, y_pred)
+    print(f"Model accuracy: {accuracy}")
+
+    # Handle predict_proba for single-class cases
+    if model.n_classes_ > 1:  # Check if there are multiple classes
+        auc = roc_auc_score(y_test, model.predict_proba(X_test)[:, 1])
+        print(f"AUC: {auc}")
+    else:
+        print("AUC calculation skipped due to single class in test data.")
 
     # Save model
     joblib.dump(model, model_path)

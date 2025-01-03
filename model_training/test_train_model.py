@@ -13,10 +13,12 @@ def test_train_and_evaluate_model(tmp_path):
     X_test_csv = tmp_path / "X_test.csv"
     y_test_csv = tmp_path / "y_test.csv"
 
-    X_train_csv.write_text("Amount,Time\n0.5,1.0\n-0.5,-1.0")
-    y_train_csv.write_text("Class\n1\n0")
-    X_test_csv.write_text("Amount,Time\n0.2,0.5\n-0.3,-0.7")
-    y_test_csv.write_text("Class\n1\n0")
+    X_train_csv.write_text("Amount,Time\n0.5,1.0\n-0.5,-1.0\n0.2,0.3\n-0.3,-0.7")
+    y_train_csv.write_text("Class\n1\n0\n1\n0")
+    X_test_csv.write_text("Amount,Time\n0.2,0.5\n-0.3,-0.7\n0.6,0.8\n-0.4,-0.6")
+    y_test_csv.write_text("Class\n1\n0\n1\n0")
+
+
 
     # Define model path
     model_path = 'model_training/fraud_model.pkl'
