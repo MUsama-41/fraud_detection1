@@ -2,8 +2,10 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, roc_auc_score
 import joblib
 import pandas as pd
+from pathlib import Path
 
-def train_and_evaluate_model(model_path):
+
+def train_and_evaluate_model(model_path, X_train_path, y_train_path, X_test_path, y_test_path):
     """
     Train a RandomForest model and evaluate it on the test dataset.
 
@@ -15,10 +17,10 @@ def train_and_evaluate_model(model_path):
         None
     """
     # Load data
-    X_train = pd.read_csv(f'X_train.csv')
-    y_train = pd.read_csv(f'y_train.csv').squeeze()
-    X_test = pd.read_csv(f'X_test.csv')
-    y_test = pd.read_csv(f'y_test.csv').squeeze()
+    X_train = pd.read_csv(X_train_path)
+    y_train = pd.read_csv(y_train_path).values.ravel()
+    X_test = pd.read_csv(X_test_path)
+    y_test = pd.read_csv(y_test_path).values.ravel()
 
     # Train model
     model = RandomForestClassifier(random_state=42)
@@ -33,4 +35,20 @@ def train_and_evaluate_model(model_path):
     joblib.dump(model, model_path)
 
 # Example Usage:
-train_and_evaluate_model('model_training/fraud_model.pkl') 
+
+tmp_path = 'model_training'
+tmp_path = Path(tmp_path)
+
+X_train_csv = tmp_path / "X_train.csv"
+y_train_csv = tmp_path / "y_train.csv"
+X_test_csv = tmp_path / "X_test.csv"
+y_test_csv = tmp_path / "y_test.csv"
+
+#train_and_evaluate_model('model_training/fraud_model.pkl') 
+train_and_evaluate_model(
+        'model_training/fraud_model.pkl',
+        X_train_csv,
+        y_train_csv,
+        X_test_csv,
+        y_test_csv,
+    )
