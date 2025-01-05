@@ -25,7 +25,7 @@ def process_data(input_csv, output_dir):
     # Split data
     X = data.drop('Class', axis=1)
     y = data['Class']
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+    X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
     # Handle class imbalance
     #smote = SMOTE(random_state=42)
