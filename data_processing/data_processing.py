@@ -42,3 +42,4 @@ def process_data(input_csv, output_dir):
 input_csv = "data_processing/creditcard.csv"
 output_dir = "model_training"
 process_data(input_csv, output_dir)
+print("x")
